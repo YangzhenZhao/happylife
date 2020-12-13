@@ -1,4 +1,4 @@
-# happylife
+# HappyLife
 
 ## Project setup
 ```

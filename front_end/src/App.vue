@@ -1,11 +1,15 @@
 <template>
   <div>
     <nav class="navbar navbar-expand navbar-dark" style="background-color: #ff2121;">
-      <a class="navbar-brand" href="#">HappyLife</a>
+      <router-link class="navbar-brand" to="/">HappyLife</router-link>
       <div class="collapse navbar-collapse">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">天气</a>
-          <a class="nav-item nav-link" href="#">日历</a>
+          <router-link
+            v-for="(item, index) in navDataList"
+            :key="index" class="nav-item nav-link"
+            active-class="active" :to="item.toUrl">
+            {{item.title}}
+          </router-link>
         </div>
       </div>
       <ul class="list-inline mb-0">
@@ -13,6 +17,7 @@
         <li class="list-inline-item"><a href="#" class="btn btn-outline-light">注册</a></li>
       </ul>
     </nav>
+    <router-view></router-view>
     <footer class="text-center py-4 text-black-50 bg-light">
       <small>&copy; 2020 不要香菜</small>
     </footer>
@@ -20,12 +25,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+const navDataList = [
+  { name: 'weather', title: '天气', toUrl: '/' },
+  { name: 'calendar', title: '日历', toUrl: '/calendar' }
+]
 export default defineComponent({
   name: 'App',
-  components: {
+  setup () {
+    const navName = ref('weather')
+    const onClickNav = (val: string) => {
+      navName.value = val
+      console.log('change to ', val)
+    }
+    return {
+      onClickNav,
+      navName,
+      navDataList
+    }
   }
 })
 </script>
