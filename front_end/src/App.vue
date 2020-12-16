@@ -13,7 +13,7 @@
         </div>
       </div>
       <ul class="list-inline mb-0">
-        <li class="list-inline-item"><a href="#" class="btn btn-outline-light">登录</a></li>
+        <li class="list-inline-item"><router-link to="/login" class="btn btn-outline-light">登录</router-link></li>
         <li class="list-inline-item"><a href="#" class="btn btn-outline-light">注册</a></li>
       </ul>
     </nav>
@@ -28,8 +28,8 @@
 import { defineComponent, ref } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 const navDataList = [
-  { name: 'weather', title: '天气', toUrl: '/' },
-  { name: 'calendar', title: '日历', toUrl: '/calendar' }
+  { title: '天气', toUrl: '/' },
+  { title: '日历', toUrl: '/calendar' }
 ]
 export default defineComponent({
   name: 'App',

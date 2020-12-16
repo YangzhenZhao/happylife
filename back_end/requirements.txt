@@ -1,1 +1,5 @@
 django==2.2
+djangorestframework
+markdown
+Django-filter
+djangorestframework-simplejwt

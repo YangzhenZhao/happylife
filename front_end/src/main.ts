@@ -3,6 +3,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import Weather from './components/Weather.vue'
 import Calendar from './components/Calendar.vue'
+import Login from './views/Login.vue'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -17,6 +18,11 @@ const router = createRouter({
       path: '/calendar',
       name: 'calendar',
       component: Calendar
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
