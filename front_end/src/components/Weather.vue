@@ -89,7 +89,13 @@ interface ThreeDayResponse {
     daily: ThreeDayItem[];
   };
 }
-const areaCode = '101010300'
+// 110105013 团结湖
+// 101010300 朝阳
+// 141023 襄汾
+// 141000 临汾
+// 101100701 临汾
+// 101100707 襄汾
+const areaCode = '101100707'
 const hefengKey = 'f2a966508ce8433da12c29af775858b3'
 const hefengAPIUrlPrefix = 'https://devapi.qweather.com/v7'
 window.WIDGET = {
@@ -101,7 +107,7 @@ window.WIDGET = {
     dataColor: 'FFFFFF',
     language: 'zh',
     borderRadius: 2,
-    city: `CN${areaCode}`,
+    city: areaCode,
     // city: 'CN101100707',
     key: '2vgaxeXBaw'
   }

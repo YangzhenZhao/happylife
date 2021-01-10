@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Weather from './components/Weather.vue'
 import Calendar from './components/Calendar.vue'
 import Login from './views/Login.vue'
+import SignUp from './views/SignUp.vue'
+import store from './store'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -23,9 +25,15 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
     }
   ]
 })
 const app = createApp(App)
 app.use(router)
+app.use(store)
 app.mount('#app')

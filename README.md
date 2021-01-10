@@ -11,7 +11,12 @@ python3.7+
 
 - <a href="https://cj.weather.com.cn/plugin/standard" target="_blank">中国天气网</a>
 
-- <a href="https://dev.qweather.com/docs/api/" target="_blank">和风天气API</a>
+- <a href="https://dev.qweather.com/docs/api/" target="_blank">和风天气API</a>        
+
+省份列表:   
+
+<a href="https://github.com/wecatch/china_regions" target="_blank">https://github.com/wecatch/china_regions</a>        
+
 
 
 ### 安装
