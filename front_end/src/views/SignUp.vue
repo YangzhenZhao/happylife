@@ -54,15 +54,15 @@
       <label for="inputAddress">性别</label>
       <div class="form-row ml-1">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <input class="form-check-input" type="radio" v-model="sex" value="male">
           <label class="form-check-label" for="inlineRadio1">男</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <input class="form-check-input" type="radio" v-model="sex" value="female">
           <label class="form-check-label" for="inlineRadio2">女</label>
         </div>
       </div>
-      <label for="inputBirthDate" class="mt-3">出生日期</label>
+      <label for="inputBirthDate" class="mt-2">出生日期</label>
       <div>
         <el-date-picker
           v-model="dateValue"
@@ -87,8 +87,9 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import province from '../hooks/province'
 import getChildLocationObj from '../hooks/locationDeal'
+import date2str from '../hooks/utils'
 const BASE_URL = 'http://localhost:8000'
-const tokenRequest = axios.create({
+const signUpRequest = axios.create({
   baseURL: BASE_URL,
   timeout: 5000
 })
@@ -101,11 +102,11 @@ export default defineComponent({
     const password = ref('')
     const passwordRepeat = ref('')
     const dateValue = ref(new Date())
-    const hefengCityId = ref('')
     const email = ref('')
     const thirdLocationName = ref('')
     const firstLocationName = ref('')
     const secondLocationName = ref('')
+    const sex = ref('')
     const secondLocationRecord: Ref<Record<string, string>> = ref({})
     const thirdLocationRecord: Ref<Record<string, string>> = ref({})
     watch(firstLocationName, async () => {
@@ -118,32 +119,48 @@ export default defineComponent({
       thirdLocationRecord.value = await getChildLocationObj(id)
       thirdLocationName.value = ''
     })
-    watch(thirdLocationName, () => {
-      if (thirdLocationName.value === '') {
+    const getHefengId = async (id: string) => {
+      return await axios.get(`https://geoapi.qweather.com/v2/city/lookup?key=f2a966508ce8433da12c29af775858b3&location=${id}`)
+    }
+    const getThirdId = () => {
+      return thirdLocationRecord.value[thirdLocationName.value]
+    }
+    const getSecondId = () => {
+      return secondLocationRecord.value[secondLocationName.value]
+    }
+    const signUp = async () => {
+      if (userName.value === '' || email.value === '' || thirdLocationName.value === '') {
         return
       }
-      const id = thirdLocationRecord.value[thirdLocationName.value]
-      axios.get(`https://geoapi.qweather.com/v2/city/lookup?key=f2a966508ce8433da12c29af775858b3&location=${id}`)
-        .then(function (response) {
-          console.log(response)
-        })
-        .catch(function (error: object) {
-          console.log(error)
-        })
-    })
-    const signUp = () => {
-      if (userName.value === '' || password.value === '' || thirdLocationName.value === '') {
+      if (sex.value === '') {
         return
       }
-      console.log(thirdLocationRecord.value[thirdLocationName.value])
-      const loginBody = {
+      if (password.value === '' || password.value !== passwordRepeat.value) {
+        return
+      }
+      const thirdId = getThirdId()
+      const response = await getHefengId(thirdId)
+      let hefengCityId = ''
+      if (response.data.code === '404') {
+        hefengCityId = (await getHefengId(getSecondId())).data.location[0].id
+      } else {
+        hefengCityId = response.data.location[0].id
+      }
+      const addr = `${firstLocationName.value}-${secondLocationName.value}-${thirdLocationName.value}`
+      const body = {
         username: userName.value,
-        password: password.value
+        password: password.value,
+        email: email.value,
+        addr,
+        sex: sex.value,
+        hefengCityId,
+        dateOfBirth: date2str(dateValue.value)
       }
-      tokenRequest.post('signup/', loginBody).then((response) => {
-        console.log(response.data)
+      const signUpResponse = await signUpRequest.post('users/signup/', body)
+      console.log(signUpResponse)
+      if (signUpResponse.data.status === '200') {
         router.push('/login')
-      })
+      }
     }
     return {
       userName,
@@ -158,7 +175,7 @@ export default defineComponent({
       thirdLocationName,
       passwordRepeat,
       dateValue,
-      hefengCityId
+      sex
     }
   }
 })

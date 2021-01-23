@@ -95,7 +95,9 @@ interface ThreeDayResponse {
 // 141000 临汾
 // 101100701 临汾
 // 101100707 襄汾
-const areaCode = '101100707'
+// 迎泽区 101100108
+// 101120504 蓬莱市
+const areaCode = '101130504'
 const hefengKey = 'f2a966508ce8433da12c29af775858b3'
 const hefengAPIUrlPrefix = 'https://devapi.qweather.com/v7'
 window.WIDGET = {

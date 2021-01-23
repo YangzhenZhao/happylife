@@ -54,7 +54,7 @@ export default defineComponent({
         router.push('/')
         store.commit('login', {
           userName: userName.value,
-          token: response.data
+          tokenData: response.data
         })
       })
     }

@@ -5,33 +5,46 @@ from django.contrib.auth.models import (
 )
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, hefeng_city_id: str, email: str, date_of_birth, password=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
-        if not email:
-            raise ValueError('Users must have an email address')
-
+    def create_user(
+        self,
+        username: str,
+        password: str,
+        email: str,
+        addr: str,
+        sex: str,
+        hefeng_city_id: str,
+        date_of_birth: str,
+    ):
+        print(f"date_of_birth = {date_of_birth}")
+        print(self.model is None)
         user = self.model(
+            username=username,
             email=self.normalize_email(email),
+            addr=addr,
+            sex=sex,
+            hefeng_city_id=hefeng_city_id,
             date_of_birth=date_of_birth,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, hefeng_city_id: str, email, date_of_birth, password):
+    def create_superuser(
+        self,
+        username: str,
+        password: str,
+        email: str,
+        addr: str,
+        sex: str,
+        hefeng_city_id: str,
+        date_of_birth: str,
+    ):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
         user = self.create_user(
-            hefeng_city_id,
-            email,
-            password=password,
-            date_of_birth=date_of_birth,
+            username, password, email, addr, sex, hefeng_city_id, date_of_birth
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -39,22 +52,30 @@ class MyUserManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser):
+    username = models.CharField(
+        verbose_name='username',
+        max_length=20,
+        unique=True,
+    )
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    date_of_birth = models.DateField()
+    date_of_birth = models.CharField(max_length=16)
+    sex = models.CharField(max_length=16)
+    addr = models.CharField(max_length=128)
+    hefeng_city_id = models.CharField(max_length=128)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['date_of_birth', 'sex', 'addr', 'hefeng_city_id', 'email']
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

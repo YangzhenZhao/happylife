@@ -15,7 +15,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('hefeng_city_id', 'email', 'date_of_birth')
+        fields = ('username', 'password', 'email', 'addr', 'sex', 'hefeng_city_id', 'date_of_birth', 'is_active', 'is_admin')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -41,7 +41,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('hefeng_city_id', 'email', 'password', 'date_of_birth', 'is_active', 'is_admin')
+        fields = ('username', 'password', 'email', 'addr', 'sex', 'hefeng_city_id', 'date_of_birth', 'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -51,30 +51,18 @@ class UserChangeForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
     form = UserChangeForm
     add_form = UserCreationForm
 
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
-    list_display = ('hefeng_city_id', 'email', 'date_of_birth', 'is_admin')
+    list_display = ('username', 'email', 'addr', 'sex', 'date_of_birth', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('hefeng_city_id', 'date_of_birth',)}),
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('email', 'sex', 'addr', 'date_of_birth',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('hefeng_city_id', 'email', 'date_of_birth', 'password1', 'password2')}
-        ),
-    )
-    search_fields = ('email',)
-    ordering = ('email',)
+    search_fields = ('username',)
+    ordering = ('username',)
     filter_horizontal = ()
 
 admin.site.register(MyUser, UserAdmin)
