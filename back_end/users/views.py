@@ -32,3 +32,8 @@ class SignupView(APIView):
                 }
             }
         return HttpResponse(json.dumps(result))
+
+
+def hefeng_city_id(request, username: str) -> str:
+    user = MyUser.objects.get(username=username)
+    return HttpResponse(user.hefeng_city_id)
