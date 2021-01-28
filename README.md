@@ -30,3 +30,11 @@ pip install -r requirements.txt
 cd front_end
 npm install
 ```
+
+### docker
+
+```
+$ cd docker
+$ sh build.sh
+$ docker run -d -v /Users/nocilantro/happylife/back_end:/back_end -p 8000:8000  back_end
+```

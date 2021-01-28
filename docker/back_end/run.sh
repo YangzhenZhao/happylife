@@ -1,4 +1,4 @@
 #!bin/sh
 
 uwsgi --ini /uwsgi-conf.ini
-nginx
+nginx -g "daemon off;"

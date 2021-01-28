@@ -1,19 +1,19 @@
-FROM python:3.8-alpine3.11
+FROM tiangolo/uwsgi-nginx
 
 RUN mkdir /root/.pip
 
 COPY pip.conf /root/.pip/
-COPY install-nginx.sh /
+COPY sources.list /etc/apt/sources.list
 COPY uwsgi-conf.ini /
 COPY requirements.txt /
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 COPY run.sh /
 
-RUN sh /install-nginx.sh; \
-    apk add --no-cache uwsgi-python3; \
-    pip install --upgrade pip; \
-    pip install -r requirements.txt;
+RUN chmod +x /run.sh; \
+    /usr/local/bin/python -m pip install --upgrade pip; \
+    pip install -r /requirements.txt;
 
 EXPOSE 8000
 
-CMD ["/run.sh"]
+WORKDIR /
+ENTRYPOINT ["/run.sh"]
