@@ -36,7 +36,7 @@ npm install
 ```
 $ cd docker
 $ sh build.sh
-$ docker run -d --rm -v /Users/nocilantro/happylife/back_end:/back_end -p 8000:8000 back_end
+$ docker run -d --rm -p 8000:8000 back_end
 
 $ docker run -ti --rm -v /Users/nocilantro/happylife/back_end:/back_end -p 8000:8000 back_end /bin/sh
 
