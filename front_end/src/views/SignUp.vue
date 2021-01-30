@@ -88,7 +88,7 @@ import axios from 'axios'
 import province from '../hooks/province'
 import getChildLocationObj from '../hooks/locationDeal'
 import date2str from '../hooks/utils'
-const BASE_URL = 'http://localhost:8000'
+import BASE_URL from '../hooks/const'
 const signUpRequest = axios.create({
   baseURL: BASE_URL,
   timeout: 5000

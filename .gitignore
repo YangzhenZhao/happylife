@@ -27,5 +27,3 @@ pnpm-debug.log*
 __pycache__/
 
 *.sqlite3
-
-docker/back_end/requirements.txt

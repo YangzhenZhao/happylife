@@ -32,7 +32,7 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
-const BASE_URL = 'http://localhost:8000'
+import BASE_URL from '../hooks/const'
 const tokenRequest = axios.create({
   baseURL: BASE_URL,
   timeout: 5000

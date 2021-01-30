@@ -40,6 +40,7 @@
 import { defineComponent, onMounted, ref, computed, watch } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
+import BASE_URL from '../hooks/const'
 declare global {
   interface Window {
     WIDGET: object;
@@ -101,7 +102,6 @@ interface ThreeDayResponse {
 const defaulfAreaId = '101100108'
 const hefengKey = 'f2a966508ce8433da12c29af775858b3'
 const hefengAPIUrlPrefix = 'https://devapi.qweather.com/v7'
-const BASE_URL = 'http://localhost:8000'
 const hefengidRequest = axios.create({
   baseURL: BASE_URL,
   timeout: 5000
