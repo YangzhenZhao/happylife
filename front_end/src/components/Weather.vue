@@ -41,55 +41,13 @@ import { defineComponent, onMounted, ref, computed, watch } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
 import BASE_URL from '../hooks/const'
+import * as weather from '../hooks/weather'
+import rearrangeDailyData from '../hooks/weather'
+
 declare global {
   interface Window {
     WIDGET: object;
   }
-}
-interface IndexItem {
-  name: string;
-  type: string;
-  text: string;
-}
-interface LifeIndexResponse {
-  data: {
-    daily: IndexItem[];
-  };
-}
-interface NowWeatherResponse {
-  data: {
-    now: {
-      humidity: string;
-      windScale: string;
-      windDir: string;
-    };
-  };
-}
-interface AirResponse {
-  data: {
-    now: {
-      category: string;
-      aqi: string;
-    };
-  };
-}
-interface WarningItem {
-  sender: string;
-  text: string;
-}
-interface WarningResponse {
-  data: {
-    warning: WarningItem[];
-  };
-}
-interface ThreeDayItem {
-  sunrise: string;
-  sunset: string;
-}
-interface ThreeDayResponse {
-  data: {
-    daily: ThreeDayItem[];
-  };
 }
 // 110105013 团结湖
 // 101010300 朝阳
@@ -155,35 +113,35 @@ export default defineComponent({
     const threeDay = ref()
     const updateWeatherShow = () => {
       axios.get(`${hefengAPIUrlPrefix}/indices/1d?key=${hefengKey}&location=${areaCode.value}&type=0`)
-        .then(function (response: LifeIndexResponse) {
-          dailyData.value = response.data.daily
+        .then(function (response: weather.LifeIndexResponse) {
+          dailyData.value = rearrangeDailyData(response.data.daily)
         })
         .catch(function (error: object) {
           console.log(error)
         })
       axios.get(`${hefengAPIUrlPrefix}/weather/now?key=${hefengKey}&location=${areaCode.value}`)
-        .then(function (response: NowWeatherResponse) {
+        .then(function (response: weather.NowWeatherResponse) {
           now.value = response.data.now
         })
         .catch(function (error: object) {
           console.log(error)
         })
       axios.get(`${hefengAPIUrlPrefix}/air/now?key=${hefengKey}&location=${areaCode.value}`)
-        .then(function (response: NowWeatherResponse) {
+        .then(function (response: weather.NowWeatherResponse) {
           air.value = response.data.now
         })
         .catch(function (error: object) {
           console.log(error)
         })
       axios.get(`${hefengAPIUrlPrefix}/weather/3d?key=${hefengKey}&location=${areaCode.value}`)
-        .then(function (response: ThreeDayResponse) {
+        .then(function (response: weather.ThreeDayResponse) {
           threeDay.value = response.data.daily
         })
         .catch(function (error: object) {
           console.log(error)
         })
       axios.get(`${hefengAPIUrlPrefix}/warning/now?key=${hefengKey}&location=${areaCode.value}`)
-        .then(function (response: WarningResponse) {
+        .then(function (response: weather.WarningResponse) {
           warningList.value = response.data.warning
         })
         .catch(function (error: object) {
@@ -205,7 +163,6 @@ export default defineComponent({
           key: '2vgaxeXBaw'
         }
       }
-      console.log('watch', areaCode.value)
       updateWeatherShow()
     })
     return {

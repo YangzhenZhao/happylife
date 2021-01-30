@@ -13,8 +13,7 @@
 #### Linux-x86_64 安装 Python3.7.3、docker-comose 示例   
 
 ```
-$ wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.07-Linux-x86_64.
-sh
+$ wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.07-Linux-x86_64.sh
 $ bash Anaconda3-2019.07-Linux-x86_64.sh
 ```
 
