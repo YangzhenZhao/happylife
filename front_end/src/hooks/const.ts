@@ -1,7 +1,3 @@
-let BASE_URL = 'http://localhost:8000'
-if (process.env.FRONT_END_BASE_URL !== undefined) {
-  BASE_URL = process.env.FRONT_END_BASE_URL
-}
-console.log(BASE_URL)
+const BASE_URL = 'http://47.102.210.180/:8000'
 
 export default BASE_URL

@@ -6,8 +6,6 @@ services:
       - 8000:8000
   front_end:
     build: front_end
-    environment:
-      - FRONT_END_BASE_URL=back_end
     ports:
       - 8080:8080
     depends_on:
