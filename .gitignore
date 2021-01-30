@@ -27,3 +27,5 @@ pnpm-debug.log*
 __pycache__/
 
 *.sqlite3
+
+front_end/dist/
