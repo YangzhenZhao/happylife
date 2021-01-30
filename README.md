@@ -1,11 +1,52 @@
 ### HappyLife
 
-一个前后端分离的娱乐项目~
+一个前后端分离的娱乐项目~      
+后端 Django 2.2     
+前端 Vue 3.0    
+
+### 环境准备
+
+- Docker      
+- Python3.7+           
+- docker-compose          
+
+#### Linux-x86_64 安装 Python3.7.3、docker-comose 示例   
+
+```
+$ wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.07-Linux-x86_64.
+sh
+$ bash Anaconda3-2019.07-Linux-x86_64.sh
+```
 
 
-### 依赖
+例如使用的`SHELL`为`zsh`，则在`.zshrc`中添加如下示例内容，具体按照自己的`anaconda3`安装目录修改    
 
-python3.7+
+```
+export PATH="/root/anaconda3/bin:$PATH"
+```
+
+然后执行以下内容:  
+
+```
+$ source ~/.zshrc
+
+$ python --version
+Python 3.7.3
+
+$ pip install --upgrade docker-compose
+$ docker-compose --version
+docker-compose version 1.28.2, build unknown
+```
+
+
+### 部署
+
+```
+$ docker-compose up -d
+```
+
+### 开发依赖
+
 
 第三方 API:    
 
@@ -18,27 +59,3 @@ python3.7+
 省份列表:   
 
 <a href="https://github.com/wecatch/china_regions" target="_blank">https://github.com/wecatch/china_regions</a>        
-
-
-
-### 安装
-
-```bash
-cd back_end
-pip install -r requirements.txt
-
-cd front_end
-npm install
-```
-
-### docker
-
-```
-$ cd docker
-$ sh build.sh
-$ docker run -d --rm -p 8000:8000 back_end
-
-$ docker run -ti --rm -p 8000:8000 back_end /bin/sh
-
-$ docker run -ti --rm -p 8000:8000 --entrypoint /bin/sh  back_end
-```
