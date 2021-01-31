@@ -36,13 +36,13 @@ const router = createRouter({
       component: SignUp
     },
     {
-      path: '/find_more',
-      name: 'find_more',
+      path: '/find-more',
+      name: 'find-more',
       component: FindMore
     },
     {
-      path: '/unicode_to_chinese',
-      name: 'unicode_to_chinese',
+      path: '/unicode-to-chinese',
+      name: 'unicode-to-chinese',
       component: UnicodeToChinese
     }
   ]

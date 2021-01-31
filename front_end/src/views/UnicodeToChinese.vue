@@ -1,6 +1,6 @@
 <template>
   <div>
-  <el-tag size="big" effect="plain">Unicode 转 中文</el-tag>
+  <el-tag effect="plain">Unicode 转 中文</el-tag>
   <el-row>
     <el-col :span="12">
       <el-card shadow="hover">

@@ -12,5 +12,5 @@ export const hefengAPIUrlPrefix = 'https://devapi.qweather.com/v7'
 export const navDataList = [
   { title: '天气', toUrl: '/' },
   { title: '日历', toUrl: '/calendar' },
-  { title: '发现', toUrl: '/find_more' }
+  { title: '发现', toUrl: '/find-more' }
 ]

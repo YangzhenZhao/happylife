@@ -1,7 +1,10 @@
 <template>
   <div>
     <nav class="navbar navbar-expand navbar-dark" style="background-color: #ff2121;">
-      <router-link class="navbar-brand" to="/">HappyLife</router-link>
+      <router-link class="navbar-brand" to="/">
+        <img src="./assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        HappyLife
+      </router-link>
       <div class="collapse navbar-collapse">
         <div class="navbar-nav">
           <router-link
