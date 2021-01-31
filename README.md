@@ -42,7 +42,7 @@ docker-compose version 1.28.2, build unknown
 
 开放服务器的`8000`和`8080`端口
 
-将`front_end/src/hooks/const.ts`中的`BASE_URL`修改为`http://你的服务器地址:8000`   
+将`front_end/src/hooks/utils.ts`中的`BASE_URL`修改为`http://你的服务器地址:8000`   
 
 修改`back_end/back_end/settings.py`内容:
 

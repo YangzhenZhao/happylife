@@ -3,6 +3,8 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import Weather from './components/Weather.vue'
 import Calendar from './components/Calendar.vue'
+import FindMore from './components/FindMore.vue'
+import UnicodeToChinese from './views/UnicodeToChinese.vue'
 import Login from './views/Login.vue'
 import SignUp from './views/SignUp.vue'
 import store from './store'
@@ -32,6 +34,16 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: SignUp
+    },
+    {
+      path: '/find_more',
+      name: 'find_more',
+      component: FindMore
+    },
+    {
+      path: '/unicode_to_chinese',
+      name: 'unicode_to_chinese',
+      component: UnicodeToChinese
     }
   ]
 })

@@ -37,10 +37,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useStore } from 'vuex'
-const navDataList = [
-  { title: '天气', toUrl: '/' },
-  { title: '日历', toUrl: '/calendar' }
-]
+import { navDataList } from './hooks/const'
 export default defineComponent({
   name: 'App',
   setup () {

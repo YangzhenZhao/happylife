@@ -81,22 +81,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, Ref, reactive, computed, toRefs } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, ref, watch, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import province from '../hooks/province'
 import getChildLocationObj from '../hooks/locationDeal'
-import date2str from '../hooks/utils'
-import BASE_URL from '../hooks/const'
+import * as utils from '../hooks/utils'
 const signUpRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: utils.baseUrl(),
   timeout: 5000
 })
 export default defineComponent({
   name: 'SignUp',
   setup () {
-    const store = useStore()
     const router = useRouter()
     const userName = ref('')
     const password = ref('')
@@ -154,7 +151,7 @@ export default defineComponent({
         addr,
         sex: sex.value,
         hefengCityId,
-        dateOfBirth: date2str(dateValue.value)
+        dateOfBirth: utils.date2str(dateValue.value)
       }
       const signUpResponse = await signUpRequest.post('users/signup/', body)
       console.log(signUpResponse)

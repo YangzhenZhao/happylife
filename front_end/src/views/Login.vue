@@ -32,9 +32,9 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
-import BASE_URL from '../hooks/const'
+import * as utils from '../hooks/utils'
 const tokenRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: utils.baseUrl(),
   timeout: 5000
 })
 export default defineComponent({

@@ -40,28 +40,18 @@
 import { defineComponent, onMounted, ref, computed, watch } from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
-import BASE_URL from '../hooks/const'
+import { defaulfAreaId, hefengKey, hefengAPIUrlPrefix } from '../hooks/const'
+import * as utils from '../hooks/utils'
 import * as weather from '../hooks/weather'
 import rearrangeDailyData from '../hooks/weather'
-
 declare global {
   interface Window {
     WIDGET: object;
   }
 }
-// 110105013 团结湖
-// 101010300 朝阳
-// 141023 襄汾
-// 141000 临汾
-// 101100701 临汾
-// 101100707 襄汾
-// 迎泽区 101100108
-// 101120504 蓬莱市
-const defaulfAreaId = '101100108'
-const hefengKey = 'f2a966508ce8433da12c29af775858b3'
-const hefengAPIUrlPrefix = 'https://devapi.qweather.com/v7'
+
 const hefengidRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: utils.baseUrl(),
   timeout: 5000
 })
 window.WIDGET = {
