@@ -16,6 +16,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "element-plus": "^1.0.1-beta.27",
+    "nzh": "^1.0.4",
     "vue": "^3.0.5",
     "vue-jsonp": "^2.0.0",
     "vue-router": "^4.0.1",

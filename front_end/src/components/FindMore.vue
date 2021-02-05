@@ -2,6 +2,11 @@
   <el-row>
     <el-col :span="7">
       <el-card shadow="always">
+        <el-link type="primary" :underline="false" href="num-to-chinese" target="_blank">数字金额转中文金额</el-link>
+      </el-card>
+    </el-col>
+    <el-col :span="7">
+      <el-card shadow="always">
         <el-link type="primary" :underline="false" href="unicode-to-chinese" target="_blank">Unicode 转 中文</el-link>
       </el-card>
     </el-col>

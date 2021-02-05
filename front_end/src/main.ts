@@ -10,6 +10,7 @@ import SignUp from './views/SignUp.vue'
 import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
+import NumToChinese from './views/NumToChinese.vue'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/unicode-to-chinese',
       name: 'unicode-to-chinese',
       component: UnicodeToChinese
+    },
+    {
+      path: '/num-to-chinese',
+      name: 'num-to-chinese',
+      component: NumToChinese
     }
   ]
 })
