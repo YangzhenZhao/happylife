@@ -4,9 +4,22 @@ services:
     build: back_end
     ports:
       - 8000:8000
+    environment:
+      - HAPPLY_DATABASE_HOST=mysql
+      - HAPPLY_DATABASE_PASSWORD=123456
+    depends_on:
+      - mysql
   front_end:
     build: front_end
     ports:
       - 8080:8080
     depends_on:
       - back_end
+  mysql:
+    build: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+        - ~/happylife_mysql:/var/lib/mysql

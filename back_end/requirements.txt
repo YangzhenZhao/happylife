@@ -4,3 +4,4 @@ markdown
 Django-filter
 djangorestframework-simplejwt
 django-cors-headers
+mysqlclient

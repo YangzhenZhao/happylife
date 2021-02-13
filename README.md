@@ -42,6 +42,8 @@ docker-compose version 1.28.2, build unknown
 
 开放服务器的`8000`和`8080`端口
 
+服务器的`~`(`$HOME`)目录下新建`happylife_mysql`文件夹用于存放 mysql 数据
+
 将`front_end/src/hooks/utils.ts`中的`BASE_URL`修改为`http://你的服务器地址:8000`   
 
 修改`back_end/back_end/settings.py`内容:
@@ -50,7 +52,12 @@ docker-compose version 1.28.2, build unknown
 ALLOWED_HOSTS = ['你的服务器地址']   
 ```
 
-执行: `docker-compose up -d`
+执行: 
+
+```
+docker-compose up -d mysql
+docker-compose up -d
+```
 
 然后访问`你的服务器地址:8080`即可    
 
