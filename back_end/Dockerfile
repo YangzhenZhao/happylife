@@ -12,6 +12,7 @@ RUN mv sources.list /etc/apt/sources.list; \
     mv pip.conf /root/.pip/; \
     /usr/local/bin/python -m pip install --upgrade pip; \
     pip install -r requirements.txt; \
+    python manage.py collectstatic; \
     pip install uwsgi; \
     mv run.sh /; \
     chmod +x /run.sh;

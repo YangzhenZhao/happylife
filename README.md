@@ -62,6 +62,30 @@ docker-compose up -d
 
 然后访问`你的服务器地址:8080`即可    
 
+### 管理后台
+
+创建管理员:   
+
+```
+$ docker exec -ti xxx /bin/sh
+# cd back_end
+# ls
+Dockerfile  back_end  manage.py  mysql_cli.conf  requirements.txt  users  uwsgi-conf.ini
+# python manage.py createsuperuser
+Username: root
+Date of birth: xxx
+Sex: male
+Addr: xxx
+Hefeng city id:
+Email address: xxx@qq.com
+Password:
+Password (again):
+Superuser created successfully.
+```
+
+访问`你的服务器地址:8000/admin`登录即可   
+
+
 ### 开发依赖
 
 
