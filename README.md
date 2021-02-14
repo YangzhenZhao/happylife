@@ -40,7 +40,8 @@ docker-compose version 1.28.2, build unknown
 
 ### 部署
 
-开放服务器的`8000`和`8080`端口
+开放服务器的`8000`和`8080`端口    
+确保服务器`3306`端口不被占用   
 
 服务器的`~`(`$HOME`)目录下新建`happylife_mysql`文件夹用于存放 mysql 数据
 
