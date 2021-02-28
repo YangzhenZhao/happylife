@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 import json
 from .models import MyUser
+from rest_framework.permissions import IsAuthenticated
 
 class SignupView(APIView):
     def post(self, request):
@@ -34,6 +35,8 @@ class SignupView(APIView):
         return HttpResponse(json.dumps(result))
 
 
-def hefeng_city_id(request, username: str) -> str:
-    user = MyUser.objects.get(username=username)
-    return HttpResponse(user.hefeng_city_id)
+class HengFengCityId(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, username: str) -> str:
+        user = MyUser.objects.get(username=username)
+        return HttpResponse(user.hefeng_city_id)

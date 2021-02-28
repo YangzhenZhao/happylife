@@ -1,27 +1,35 @@
 import { createStore } from 'vuex'
 
-const ACCESS_TOKEN = 'access_token'
-const REFRESH_TOKEN = 'refresh_token'
+let accessToken = 'accessToken'
+let refreshToken = 'refreshToken'
 let userName = ''
 if (localStorage.userName) {
   userName = localStorage.userName
+  accessToken = localStorage.accessToken
+  refreshToken = localStorage.refreshToken
 }
 const store = createStore({
   state: {
-    userName: userName
+    userName: userName,
+    accessToken: accessToken,
+    refreshToken: refreshToken
   },
   mutations: {
     login (state, { userName, tokenData }) {
       localStorage.userName = userName
-      localStorage.setItem(ACCESS_TOKEN, tokenData.access)
-      localStorage.setItem(REFRESH_TOKEN, tokenData.refresh)
       state.userName = userName
+      localStorage.accessToken = tokenData.access
+      state.accessToken = tokenData.access
+      localStorage.refreshToken = tokenData.refresh
+      state.refreshToken = tokenData.refresh
     },
     logout (state) {
       localStorage.userName = ''
-      localStorage.removeItem(ACCESS_TOKEN)
-      localStorage.removeItem(REFRESH_TOKEN)
       state.userName = ''
+      localStorage.accessToken = ''
+      state.accessToken = ''
+      localStorage.refreshToken = ''
+      state.refreshToken = ''
     }
   },
   actions: {

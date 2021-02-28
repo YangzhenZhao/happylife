@@ -49,11 +49,6 @@ declare global {
     WIDGET: object;
   }
 }
-
-const hefengidRequest = axios.create({
-  baseURL: utils.baseUrl(),
-  timeout: 5000
-})
 window.WIDGET = {
   CONFIG: {
     layout: 1,
@@ -73,6 +68,7 @@ export default defineComponent({
     const areaCode = ref(defaulfAreaId)
     const store = useStore()
     const userName = computed(() => store.state.userName)
+    const accessToken = computed(() => store.state.accessToken)
     onMounted(async () => {
       (function (d) {
         const c = d.createElement('link')
@@ -86,6 +82,12 @@ export default defineComponent({
           sn.parentNode.insertBefore(s, sn)
         }
       })(document)
+      const hefengidRequest = axios.create({
+        baseURL: utils.baseUrl(),
+        timeout: 5000,
+        headers: { Authorization: 'Bearer ' + accessToken.value }
+      })
+      console.log(accessToken.value)
       const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
       areaCode.value = res.data
     })
@@ -93,6 +95,11 @@ export default defineComponent({
       if (userName.value === '') {
         return
       }
+      const hefengidRequest = axios.create({
+        baseURL: utils.baseUrl(),
+        timeout: 5000,
+        headers: { Authorization: 'Bearer ' + accessToken.value }
+      })
       const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
       areaCode.value = res.data
     })
@@ -162,7 +169,8 @@ export default defineComponent({
       threeDay,
       warningList,
       userName,
-      areaCode
+      areaCode,
+      accessToken
     }
   }
 })

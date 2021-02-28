@@ -33,6 +33,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import * as utils from '../hooks/utils'
+import { ElMessage } from 'element-plus'
 const tokenRequest = axios.create({
   baseURL: utils.baseUrl(),
   timeout: 5000
@@ -51,11 +52,17 @@ export default defineComponent({
       }
       tokenRequest.post('api/token/', loginBody).then((response) => {
         console.log(response.data)
+        ElMessage.success({
+          message: '登录成功',
+          type: 'success'
+        })
         router.push('/')
         store.commit('login', {
           userName: userName.value,
           tokenData: response.data
         })
+      }).catch(function () {
+        ElMessage.error('用户名或密码错误!')
       })
     }
     return {

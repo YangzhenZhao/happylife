@@ -87,6 +87,7 @@ import axios from 'axios'
 import province from '../hooks/province'
 import getChildLocationObj from '../hooks/locationDeal'
 import * as utils from '../hooks/utils'
+import { ElMessage } from 'element-plus'
 const signUpRequest = axios.create({
   baseURL: utils.baseUrl(),
   timeout: 5000
@@ -126,13 +127,28 @@ export default defineComponent({
       return secondLocationRecord.value[secondLocationName.value]
     }
     const signUp = async () => {
-      if (userName.value === '' || email.value === '' || thirdLocationName.value === '') {
+      if (userName.value === '') {
+        ElMessage.error('请输入用户名!')
+        return
+      }
+      if (password.value === '') {
+        ElMessage.error('请输入密码!')
+        return
+      }
+      if (password.value !== passwordRepeat.value) {
+        ElMessage.error('两次输入密码不一致!')
+        return
+      }
+      if (thirdLocationName.value === '') {
+        ElMessage.error('请选择所在地址!')
+        return
+      }
+      if (email.value === '') {
+        ElMessage.error('请输入邮箱地址!')
         return
       }
       if (sex.value === '') {
-        return
-      }
-      if (password.value === '' || password.value !== passwordRepeat.value) {
+        ElMessage.error('请选择性别!')
         return
       }
       const thirdId = getThirdId()
@@ -154,7 +170,10 @@ export default defineComponent({
         dateOfBirth: utils.date2str(dateValue.value)
       }
       const signUpResponse = await signUpRequest.post('users/signup/', body)
-      console.log(signUpResponse)
+      ElMessage.success({
+        message: '注册成功',
+        type: 'success'
+      })
       if (signUpResponse.data.status === '200') {
         router.push('/login')
       }
