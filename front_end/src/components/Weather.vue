@@ -62,6 +62,10 @@ window.WIDGET = {
     key: '2vgaxeXBaw'
   }
 }
+const hefengidRequest = axios.create({
+  baseURL: utils.baseUrl(),
+  timeout: 5000
+})
 export default defineComponent({
   name: 'Weather',
   setup () {
@@ -69,6 +73,30 @@ export default defineComponent({
     const store = useStore()
     const userName = computed(() => store.state.userName)
     const accessToken = computed(() => store.state.accessToken)
+    const getHefengCityId = async () => {
+      hefengidRequest.defaults.headers.Authorization = `Bearer ${accessToken.value}`
+      try {
+        const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
+        areaCode.value = res.data
+      } catch (err) {
+        console.log(err)
+        if (err.response.status === 401) {
+          const refreshBody = { refresh: store.state.refreshToken }
+          try {
+            const res = await hefengidRequest.post('/api/token/refresh/', refreshBody)
+            if (res.status === 200) {
+              store.commit('refresh', res.data.access)
+              const headerAuthorization = `Bearer ${res.data.access}`
+              hefengidRequest.defaults.headers.Authorization = headerAuthorization
+              const response = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
+              areaCode.value = response.data
+            }
+          } catch (err) {
+            console.log('refresh err:', err)
+          }
+        }
+      }
+    }
     onMounted(async () => {
       (function (d) {
         const c = d.createElement('link')
@@ -82,26 +110,13 @@ export default defineComponent({
           sn.parentNode.insertBefore(s, sn)
         }
       })(document)
-      const hefengidRequest = axios.create({
-        baseURL: utils.baseUrl(),
-        timeout: 5000,
-        headers: { Authorization: 'Bearer ' + accessToken.value }
-      })
-      console.log(accessToken.value)
-      const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
-      areaCode.value = res.data
+      await getHefengCityId()
     })
     watch(userName, async () => {
       if (userName.value === '') {
         return
       }
-      const hefengidRequest = axios.create({
-        baseURL: utils.baseUrl(),
-        timeout: 5000,
-        headers: { Authorization: 'Bearer ' + accessToken.value }
-      })
-      const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
-      areaCode.value = res.data
+      await getHefengCityId()
     })
     const warningList = ref()
     const dailyData = ref()
@@ -170,7 +185,8 @@ export default defineComponent({
       warningList,
       userName,
       areaCode,
-      accessToken
+      accessToken,
+      getHefengCityId
     }
   }
 })

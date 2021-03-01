@@ -23,6 +23,10 @@ const store = createStore({
       localStorage.refreshToken = tokenData.refresh
       state.refreshToken = tokenData.refresh
     },
+    refresh (state, accessToken) {
+      localStorage.accessToken = accessToken
+      state.accessToken = accessToken
+    },
     logout (state) {
       localStorage.userName = ''
       state.userName = ''
