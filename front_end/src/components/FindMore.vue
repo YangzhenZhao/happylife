@@ -2,6 +2,11 @@
   <el-row>
     <el-col :span="7">
       <el-card shadow="always">
+        <el-link type="primary" :underline="false" href="https://tool.oschina.net/" target="_blank">OSCHINA 工具列表</el-link>
+      </el-card>
+    </el-col>
+    <el-col :span="7">
+      <el-card shadow="always">
         <el-link type="primary" :underline="false" href="num-to-chinese" target="_blank">数字金额转中文金额</el-link>
       </el-card>
     </el-col>

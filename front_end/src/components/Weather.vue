@@ -79,7 +79,6 @@ export default defineComponent({
         const res = await hefengidRequest.get(`users/hefeng_city_id/${userName.value}`)
         areaCode.value = res.data
       } catch (err) {
-        console.log(err)
         if (err.response.status === 401) {
           const refreshBody = { refresh: store.state.refreshToken }
           try {
@@ -92,7 +91,9 @@ export default defineComponent({
               areaCode.value = response.data
             }
           } catch (err) {
-            console.log('refresh err:', err)
+            if (err.response.status === 401) {
+              store.commit('logout')
+            }
           }
         }
       }
