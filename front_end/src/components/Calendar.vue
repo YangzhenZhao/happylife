@@ -50,6 +50,12 @@ export default defineComponent({
             borderColor: 'green'
           },
           {
+            title: '上班',
+            start: '2021-04-25',
+            backgroundColor: 'red',
+            borderColor: 'red'
+          },
+          {
             title: '休息',
             start: '2021-05-01',
             end: '2021-05-06',

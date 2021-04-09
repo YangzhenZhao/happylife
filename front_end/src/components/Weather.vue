@@ -4,7 +4,7 @@
       <div class="row no-gutters">
         <div class="col-md-4 bg-info">
           <div class="card bg-info">
-            <div id="weather-v2-plugin-standard"></div>
+            <div id="he-plugin-standard"></div>
             <ul class="list-group list-group-flush">
               <li v-if="now" class="list-group-item">相对湿度: {{now.humidity}}%</li>
               <li v-if="air" class="list-group-item">空气质量: {{air.category}} {{air.aqi}}</li>
@@ -59,7 +59,7 @@ window.WIDGET = {
     language: 'zh',
     borderRadius: 2,
     city: defaulfAreaId,
-    key: '2vgaxeXBaw'
+    key: '7eb0041249df428d842a21fec4368eb1'
   }
 }
 const hefengidRequest = axios.create({
@@ -104,7 +104,7 @@ export default defineComponent({
         c.rel = 'stylesheet'
         c.href = 'https://apip.weatherdt.com/standard/static/css/weather-standard.css?v=2.0'
         const s = d.createElement('script')
-        s.src = 'https://apip.weatherdt.com/standard/static/js/weather-standard.js?v=2.0'
+        s.src = 'https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0'
         const sn = d.getElementsByTagName('script')[0]
         if (sn && sn.parentNode) {
           sn.parentNode.insertBefore(c, sn)
@@ -173,7 +173,7 @@ export default defineComponent({
           language: 'zh',
           borderRadius: 2,
           city: areaCode.value,
-          key: '2vgaxeXBaw'
+          key: '7eb0041249df428d842a21fec4368eb1'
         }
       }
       updateWeatherShow()

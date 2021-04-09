@@ -91,7 +91,6 @@ Superuser created successfully.
 
 第三方 API:    
 
-- <a href="https://cj.weather.com.cn/plugin/standard" target="_blank">中国天气网</a>
 
 - <a href="https://dev.qweather.com/docs/api/" target="_blank">和风天气API</a>        
 
